@@ -140,3 +140,5 @@ AWS_STORAGE_BUCKET_NAME = 'data-factory'
 AWS_S3_ENDPOINT_URL = 'https://<accountid>.r2.cloudflarestorage.com'
 AWS_S3_REGION_NAME = 'auto'
 AWS_QUERYSTRING_AUTH = False
+ALLOWED_HOSTS = ['*']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
