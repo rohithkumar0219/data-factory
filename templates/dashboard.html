@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+<a href="/upload/">Upload CSV</a>
+
+<table border="1">
+<tr>
+  <th>Name</th>
+  <th>Before</th>
+  <th>After</th>
+  <th>AI Insights</th>
+  <th>Download</th>
+</tr>
+
+{% for d in datasets %}
+<tr>
+  <td>{{ d.name }}</td>
+  <td>{{ d.rows_before }}</td>
+  <td>{{ d.rows_after }}</td>
+  <td><pre>{{ d.ai_summary }}</pre></td>
+  <td><a href="/download/{{ d.id }}/">Download</a></td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
