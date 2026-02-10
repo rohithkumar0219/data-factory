@@ -2,7 +2,14 @@
 __pycache__/
 *.pyc
 *.pyo
+<<<<<<< HEAD
 *.pyd
+=======
+
+# Django
+
+media/
+>>>>>>> 892d7f6f41bb8d0cc7fcf185912b8e66377f31c1
 
 # Virtual environment
 venv/
