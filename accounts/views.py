@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import Profile
 from .forms import RegisterForm, FaceLoginForm
 from .face_service import register_face, verify_face
+from django.contrib.auth import logout
 
 
 def register(request):
@@ -58,3 +59,8 @@ def face_login(request):
         'form': form,
         'error': error
     })
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')

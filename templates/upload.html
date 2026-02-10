@@ -1,10 +1,194 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Upload CSV</h2>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input type="file" name="file" required>
-  <button type="submit">Upload</button>
-</form>
-<p style="color:red;">{{ error }}</p>
+
+<style>
+    .upload-section {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .section h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--gray-900);
+    }
+
+    .upload-card {
+        background: var(--card);
+        padding: 3rem;
+        border-radius: 1rem;
+        border: 2px dashed var(--primary);
+        text-align: center;
+        transition: all 0.3s ease;
+        margin: 2rem 0;
+    }
+
+    .upload-card:hover {
+        border-color: #3ca65f;
+        background: #f0fdf4;
+    }
+
+    .upload-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    .file-input-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .file-input-wrapper input[type="file"] {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .file-label {
+        display: block;
+        padding: 1rem;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+    }
+
+    .file-label:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .filename-display {
+        font-size: 0.95rem;
+        color: var(--gray-600);
+        margin-bottom: 1rem;
+        min-height: 1.5rem;
+    }
+
+    .upload-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn-submit {
+        padding: 1rem;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-submit:active {
+        transform: translateY(0);
+    }
+
+    .error {
+        background: #fee2e2;
+        color: #991b1b;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        border-left: 4px solid #dc2626;
+    }
+
+    .info-text {
+        color: var(--gray-600);
+        font-size: 0.95rem;
+        margin-top: 1rem;
+    }
+
+    .file-types {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+
+    .file-badge {
+        background: #f0fdf4;
+        color: var(--primary);
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+        .upload-card {
+            padding: 2rem;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+        }
+    }
+</style>
+
+<div class="upload-section">
+    <section class="section">
+        <h2>📤 Upload Your Data</h2>
+        <p class="section-sub">Select a file to clean, validate, and process</p>
+
+        {% if error %}
+            <div class="error">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+
+        <div class="upload-card">
+            <div class="upload-icon">📁</div>
+
+            <form method="post" enctype="multipart/form-data" class="upload-form">
+                {% csrf_token %}
+
+                <div class="file-input-wrapper">
+                    <label class="file-label">
+                        Choose File
+                        <input type="file" name="file" required accept=".csv,.xlsx,.xls,.json,.tsv,.txt" onchange="updateFilename(this)">
+                    </label>
+                    <div class="filename-display" id="filename"></div>
+                </div>
+
+                <button type="submit" class="btn-submit">🚀 Upload & Process</button>
+            </form>
+
+            <p class="info-text">Supported formats:</p>
+            <div class="file-types">
+                <span class="file-badge">CSV</span>
+                <span class="file-badge">XLSX</span>
+                <span class="file-badge">XLS</span>
+                <span class="file-badge">JSON</span>
+                <span class="file-badge">TSV</span>
+                <span class="file-badge">TXT</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    function updateFilename(input) {
+        const filename = document.getElementById('filename');
+        if (input.files && input.files[0]) {
+            filename.textContent = '✅ Selected: ' + input.files[0].name;
+        }
+    }
+</script>
+
 {% endblock %}

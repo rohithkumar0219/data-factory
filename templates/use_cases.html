@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .use-cases-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .use-case-card {
+        background: var(--card);
+        padding: 2.5rem;
+        border-radius: 1rem;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+    }
+
+    .use-case-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(82, 199, 125, 0.1);
+        border-color: #52c77d;
+    }
+
+    .use-case-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .use-case-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: var(--gray-900);
+        font-weight: 700;
+    }
+
+    .use-case-card p {
+        color: var(--gray-600);
+        line-height: 1.7;
+        font-size: 1rem;
+    }
+
+    .section h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-sub {
+        font-size: 1.1rem;
+        color: var(--gray-600);
+        max-width: 700px;
+        margin: 0 auto 3rem;
+    }
+
+    @media (max-width: 768px) {
+        .section h1 {
+            font-size: 2rem;
+        }
+
+        .use-cases-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="section">
+    <h1>📋 Use Cases</h1>
+    <p class="section-sub">Built for real-world data challenges across industries and applications.</p>
+
+    <div class="use-cases-grid">
+        <div class="use-case-card">
+            <div class="use-case-icon">🤖</div>
+            <h3>Machine Learning</h3>
+            <p>Generate high-quality training and validation datasets with automatic feature engineering and data standardization.</p>
+        </div>
+
+        <div class="use-case-card">
+            <div class="use-case-icon">🤝</div>
+            <h3>Data Sharing</h3>
+            <p>Securely share datasets with partners while maintaining control over access and maintaining compliance standards.</p>
+        </div>
+
+        <div class="use-case-card">
+            <div class="use-case-icon">✅</div>
+            <h3>Compliance & Audit</h3>
+            <p>Track all data transformations with detailed audit logs and dataset history for regulatory requirements.</p>
+        </div>
+
+        <div class="use-case-card">
+            <div class="use-case-icon">📊</div>
+            <h3>Business Analytics</h3>
+            <p>Prepare data for analytics and BI tools with consistent formatting and quality validation.</p>
+        </div>
+
+        <div class="use-case-card">
+            <div class="use-case-icon">🔄</div>
+            <h3>Data Integration</h3>
+            <p>Consolidate data from multiple sources into unified, clean formats ready for downstream processing.</p>
+        </div>
+
+        <div class="use-case-card">
+            <div class="use-case-icon">📈</div>
+            <h3>Reporting</h3>
+            <p>Create reliable datasets for dashboards and reports with automatic data quality checks.</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .error-container {
+        max-width: 500px;
+        margin: 3rem auto;
+        text-align: center;
+    }
+
+    .error-card {
+        background: #fee2e2;
+        border: 2px solid #dc2626;
+        padding: 3rem;
+        border-radius: 1rem;
+    }
+
+    .error-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+
+    .error-card h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: #991b1b;
+    }
+
+    .error-card p {
+        font-size: 1.1rem;
+        color: #7f1d1d;
+        margin-bottom: 2rem;
+    }
+
+    .back-home-btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, #52c77d, #3ca65f);
+        color: white;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .back-home-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(82, 199, 125, 0.3);
+    }
+</style>
+
+<div class="error-container">
+    <div class="error-card">
+        <div class="error-icon">🚫</div>
+        <h1>{{ error }}</h1>
+        <p>{{ message }}</p>
+        <a href="/" class="back-home-btn">← Back to Home</a>
+    </div>
+</div>
+
+{% endblock %}

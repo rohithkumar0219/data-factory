@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .feature-card {
+        background: var(--card);
+        padding: 2.5rem;
+        border-radius: 1rem;
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #52c77d, #52c77d);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        border-color: var(--primary);
+    }
+
+    .feature-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+        color: var(--gray-900);
+    }
+
+    .feature-card p {
+        color: var(--gray-600);
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="section">
+    <h1>✨ Platform Features</h1>
+    <p class="section-sub">
+        Everything you need for secure and scalable data processing.
+    </p>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🧹</div>
+            <h3>Data Cleaning</h3>
+            <p>Automated validation and correction with intelligent algorithms.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚙️</div>
+            <h3>Transformations</h3>
+            <p>Schema normalization and enrichment for consistency.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💾</div>
+            <h3>Central Storage</h3>
+            <p>Versioned and auditable datasets with full history.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔑</div>
+            <h3>Access Control</h3>
+            <p>Fine-grained permission control with access codes.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📜</div>
+            <h3>Licensing</h3>
+            <p>Dataset usage rights management and tracking.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔐</div>
+            <h3>Enterprise Security</h3>
+            <p>Enterprise-grade encryption and compliance standards.</p>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

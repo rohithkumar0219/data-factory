@@ -1,0 +1,34 @@
+from django.contrib import admin
+from .models import Dataset
+
+@admin.register(Dataset)
+class DatasetAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+        'owner',
+        'processed',
+        'rows_before',
+        'rows_after',
+        'cleaned_rows'
+    )
+
+    list_filter = ('processed',)
+    search_fields = ('name', 'owner__username')
+    readonly_fields = (
+        'rows_before',
+        'rows_after',
+        'cleaned_rows',
+        'ai_summary',
+        'processed_file'
+    )
+
+    actions = ['reprocess_datasets']
+
+    def reprocess_datasets(self, request, queryset):
+        from .processing import process_file
+        for dataset in queryset:
+            process_file(dataset)
+        self.message_user(request, "Selected datasets reprocessed successfully.")
+
+    reprocess_datasets.short_description = "Re-process selected datasets"

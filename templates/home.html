@@ -1,19 +1,161 @@
 {% extends "base.html" %}
-
 {% block content %}
-<section class="hero">
-  <h1>Data Factory</h1>
-  <p>Transform raw data into clean, usable insights with AI assistance.</p>
 
-  <div class="actions">
-    <a href="/accounts/login/" class="btn">Login</a>
-    <a href="/accounts/register/" class="btn btn-outline">Get Started</a>
-  </div>
+<style>
+    .hero {
+        text-align: center;
+        padding: 4rem 0;
+        margin-bottom: 5rem;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        color: var(--gray-900);
+        font-weight: 700;
+    }
+
+    .hero .highlight {
+        background: linear-gradient(135deg, #52c77d, #52c77d);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero p {
+        font-size: 1.25rem;
+        color: var(--gray-600);
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        line-height: 1.8;
+    }
+
+    .hero-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        margin-top: 2.5rem;
+        flex-wrap: wrap;
+    }
+
+    .hero-buttons a {
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-outline {
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        background: transparent;
+    }
+
+    .btn-outline:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .features .card {
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .features .card h3 {
+        font-size: 1.25rem;
+        color: var(--gray-900);
+    }
+
+    .features .card p {
+        color: var(--gray-600);
+        font-size: 1rem;
+    }
+
+    .icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+        }
+
+        .hero-buttons a {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+
+<section class="hero">
+    <h1>
+        Transform Raw Data Into<br>
+        <span class="highlight">Actionable Intelligence</span>
+    </h1>
+
+    <p>
+        Automatically clean, validate, and transform your data into structured,
+        secure formats ready for analytics and machine learning.
+    </p>
+
+    <div class="hero-buttons">
+        {% if user.is_authenticated %}
+            <a href="/upload/" class="btn-primary">📤 Upload Data</a>
+            <a href="/dashboard/" class="btn-outline">📊 View Dashboard</a>
+        {% else %}
+            <a href="/accounts/register/" class="btn-primary">🚀 Get Started</a>
+            <a href="/accounts/login/" class="btn-outline">🔐 Login</a>
+        {% endif %}
+    </div>
 </section>
 
 <section class="features">
-  <div class="card">AI-assisted data analysis</div>
-  <div class="card">Secure cloud face authentication</div>
-  <div class="card">Clean CSV processing & download</div>
+    <div class="card">
+        <div class="icon">🧹</div>
+        <h3>Automatic Data Cleaning</h3>
+        <p>Remove duplicates, fix nulls, and validate schemas automatically with intelligent algorithms.</p>
+    </div>
+    <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Smart Transformations</h3>
+        <p>Convert raw datasets into ML-ready structured formats in seconds with zero configuration.</p>
+    </div>
+    <div class="card">
+        <div class="icon">🔒</div>
+        <h3>Secure Storage</h3>
+        <p>Your processed data stays protected on your infrastructure with enterprise-grade security.</p>
+    </div>
 </section>
+
 {% endblock %}

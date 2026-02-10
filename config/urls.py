@@ -22,8 +22,25 @@ from datasets.views import dashboard, upload, download
 def home(request):
     return render(request, "home.html")
 
+def features(request):
+    return render(request, "features.html")
+
+def how_it_works(request):
+    return render(request, "how_it_works.html")
+
+def use_cases(request):
+    return render(request, "use_cases.html")
+
+def security(request):
+    return render(request, "security.html")
+
 urlpatterns = [
-    path('', home),
+    path('', home, name='home'),
+    path('features/', features, name='features'),
+    path('how-it-works/', how_it_works, name='how_it_works'),
+    path('use-cases/', use_cases, name='use_cases'),
+    path('security/', security, name='security'),
+
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
@@ -32,4 +49,3 @@ urlpatterns = [
     path('upload/', upload),
     path('download/<int:id>/', download),
 ]
-

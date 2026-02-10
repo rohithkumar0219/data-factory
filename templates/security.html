@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .security-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .security-card {
+        background: linear-gradient(135deg, #f0fdf4, #e6f9f1);
+        padding: 2.5rem;
+        border-radius: 1rem;
+        border: 1px solid #c8e6da;
+        transition: all 0.3s ease;
+    }
+
+    .security-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(82, 199, 125, 0.15);
+    }
+
+    .security-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .security-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+        color: var(--gray-900);
+    }
+
+    .security-card p {
+        color: var(--gray-700);
+        line-height: 1.6;
+    }
+
+    .security-highlights {
+        background: var(--card);
+        padding: 2rem;
+        border-radius: 1rem;
+        border: 1px solid var(--border);
+        margin-top: 3rem;
+    }
+
+    .security-highlights h3 {
+        margin-bottom: 1rem;
+        color: var(--gray-900);
+    }
+
+    .highlights-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .highlight-item {
+        padding: 1rem;
+        background: #f0fdf4;
+        border-radius: 0.5rem;
+        border-left: 4px solid #52c77d;
+    }
+
+    .highlight-item strong {
+        color: #3ca65f;
+    }
+
+    @media (max-width: 768px) {
+        .security-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="section">
+    <h1>🔒 Security</h1>
+    <p class="section-sub">
+        Enterprise-grade protection for your data with industry standards.
+    </p>
+
+    <div class="security-grid">
+        <div class="security-card">
+            <div class="security-icon">🔐</div>
+            <h3>End-to-End Encryption</h3>
+            <p>Data encrypted in transit using TLS and at rest with AES-256 encryption.</p>
+        </div>
+        <div class="security-card">
+            <div class="security-icon">👥</div>
+            <h3>Role-Based Access Control</h3>
+            <p>Granular permission management with role-based access patterns.</p>
+        </div>
+        <div class="security-card">
+            <div class="security-icon">📊</div>
+            <h3>Complete Audit Trails</h3>
+            <p>Activity tracking and comprehensive logging for compliance requirements.</p>
+        </div>
+        <div class="security-card">
+            <div class="security-icon">✅</div>
+            <h3>Compliance Standards</h3>
+            <p>Built for GDPR, HIPAA, and SOC 2 compliance requirements.</p>
+        </div>
+    </div>
+
+    <div class="security-highlights">
+        <h3>🛡️ Key Security Features</h3>
+        <div class="highlights-list">
+            <div class="highlight-item">
+                <strong>Two-Factor Authentication</strong><br>
+                Enhanced account security with 2FA
+            </div>
+            <div class="highlight-item">
+                <strong>Regular Backups</strong><br>
+                Automated daily backups and disaster recovery
+            </div>
+            <div class="highlight-item">
+                <strong>Threat Monitoring</strong><br>
+                24/7 security monitoring and alerts
+            </div>
+            <div class="highlight-item">
+                <strong>Data Isolation</strong><br>
+                Secure data separation between accounts
+            </div>
+            <div class="highlight-item">
+                <strong>Pentesting</strong><br>
+                Regular security audits and penetration testing
+            </div>
+            <div class="highlight-item">
+                <strong>DLP Protection</strong><br>
+                Data loss prevention and access controls
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

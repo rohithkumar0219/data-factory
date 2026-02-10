@@ -1,25 +1,224 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Dashboard</h2>
-<a href="/upload/">Upload CSV</a>
 
-<table border="1">
-<tr>
-  <th>Name</th>
-  <th>Before</th>
-  <th>After</th>
-  <th>AI Insights</th>
-  <th>Download</th>
-</tr>
+<style>
+    .dashboard-section {
+        display: grid;
+        gap: 2rem;
+    }
 
-{% for d in datasets %}
-<tr>
-  <td>{{ d.name }}</td>
-  <td>{{ d.rows_before }}</td>
-  <td>{{ d.rows_after }}</td>
-  <td><pre>{{ d.ai_summary }}</pre></td>
-  <td><a href="/download/{{ d.id }}/">Download</a></td>
-</tr>
-{% endfor %}
-</table>
+    .section h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        color: var(--gray-900);
+    }
+
+    .summary-box {
+        background: linear-gradient(135deg, #f0fdf4, #e6f9f1);
+        border: 1px solid #c8e6da;
+        padding: 2rem;
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .summary-box h3 {
+        color: #3ca65f;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .summary-box pre {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        color: var(--gray-700);
+        font-size: 0.95rem;
+        overflow-x: auto;
+        border: 1px solid var(--border);
+    }
+
+    .datasets-container {
+        background: var(--card);
+        border-radius: 1rem;
+        border: 1px solid var(--border);
+        overflow: hidden;
+    }
+
+    .no-datasets {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--gray-600);
+    }
+
+    .no-datasets-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table th {
+        background: #e6f9f1;
+        padding: 1rem;
+        text-align: left;
+        font-weight: 700;
+        color: var(--gray-900);
+        border-bottom: 2px solid #52c77d;
+        font-size: 0.95rem;
+    }
+
+    .table td {
+        padding: 1rem;
+        border-bottom: 1px solid var(--border);
+        color: var(--gray-700);
+        font-size: 0.95rem;
+    }
+
+    .table tr:hover {
+        background: #f9fafb;
+    }
+
+    .table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        border-radius: 2rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .status-processing {
+        background: #fef3c7;
+        color: #92400e;
+    }
+
+    .status-complete {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    .download-btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        text-decoration: none;
+        border: none;
+        border-radius: 0.4rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .upload-btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        color: white;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+    }
+
+    .upload-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .table-wrapper {
+            font-size: 0.9rem;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.75rem 0.5rem;
+        }
+    }
+</style>
+
+<section class="dashboard-section">
+    <div>
+        <h2>📊 Your Datasets</h2>
+
+        {% if datasets %}
+            <a href="/upload/" class="upload-btn">📤 Upload New Dataset</a>
+        {% endif %}
+
+        {% if datasets %}
+            {% for d in datasets %}
+                {% if d.ai_summary %}
+                    <div class="summary-box">
+                        <h3>✨ Dataset Summary: {{ d.name }}</h3>
+                        <pre>{{ d.ai_summary }}</pre>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="datasets-container">
+        {% if datasets %}
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>📁 Dataset Name</th>
+                        <th>📊 Rows Cleaned</th>
+                        <th>💾 Rows Before</th>
+                        <th>✏️ Rows After</th>
+                        <th>📥 Download</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for d in datasets %}
+                        <tr>
+                            <td>
+                                <strong>{{ d.name }}</strong>
+                            </td>
+                            <td>{{ d.cleaned_rows|default:"—" }}</td>
+                            <td>{{ d.rows_before|default:"—" }}</td>
+                            <td>{{ d.rows_after|default:"—" }}</td>
+                            <td>
+                                {% if d.processed_file %}
+                                    <a href="/download/{{ d.id }}/" class="download-btn">⬇️ Download</a>
+                                {% else %}
+                                    <span class="status-badge status-processing">⏳ Processing…</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="no-datasets">
+                <div class="no-datasets-icon">📭</div>
+                <h3>No Datasets Yet</h3>
+                <p>Get started by uploading your first dataset</p>
+                <a href="/upload/" class="upload-btn" style="margin-top: 1.5rem;">📤 Upload Dataset</a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
 {% endblock %}

@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .workflow-container {
+        margin-top: 3rem;
+    }
+
+    .workflow-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .workflow-step {
+        background: var(--card);
+        padding: 2.5rem;
+        border-radius: 1rem;
+        border: 2px solid var(--border);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .workflow-step:hover {
+        border-color: #52c77d;
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(82, 199, 125, 0.1);
+    }
+
+    .step-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #52c77d, #3ca65f);
+        color: white;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .step-icon {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .workflow-step h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+        color: var(--gray-900);
+    }
+
+    .workflow-step p {
+        color: var(--gray-600);
+        line-height: 1.6;
+    }
+
+    .workflow-connector {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    @media (min-width: 1024px) {
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+            align-items: start;
+            gap: 1rem;
+        }
+
+        .workflow-connector {
+            display: flex;
+            padding-top: 3rem;
+        }
+
+        .workflow-connector span {
+            color: #52c77d;
+            font-size: 2rem;
+        }
+    }
+
+    .detailed-workflow {
+        background: linear-gradient(135deg, #f0fdf4, #e6f9f1);
+        padding: 2.5rem;
+        border-radius: 1rem;
+        border: 2px solid #c8e6da;
+        margin-top: 3rem;
+    }
+
+    .workflow-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 1.5rem;
+    }
+
+    .detail-item {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        border-left: 4px solid #52c77d;
+    }
+
+    .detail-item strong {
+        color: #3ca65f;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .workflow-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        .workflow-connector {
+            display: none !important;
+        }
+    }
+</style>
+
+<section class="section">
+    <h1>⚙️ How It Works</h1>
+    <p class="section-sub">Transform your raw data into actionable insights in just four steps.</p>
+
+    <div class="workflow-container">
+        <div class="workflow-grid">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-icon">📤</div>
+                <h3>Upload</h3>
+                <p>Submit your data in CSV, JSON, Excel, or other supported formats. Simply drag and drop or use the file picker.</p>
+            </div>
+
+            <div class="workflow-connector">
+                <span>→</span>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-icon">⚡</div>
+                <h3>Process</h3>
+                <p>Automatic cleaning, validation, and transformation. Our AI engine removes duplicates, fixes inconsistencies, and normalizes data.</p>
+            </div>
+
+            <div class="workflow-connector">
+                <span>→</span>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-icon">💾</div>
+                <h3>Store</h3>
+                <p>Your processed data is securely stored with version control, audit logs, and encrypted at rest with full compliance.</p>
+            </div>
+
+            <div class="workflow-connector">
+                <span>→</span>
+            </div>
+
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-icon">📊</div>
+                <h3>Access</h3>
+                <p>Download clean datasets, integrate with analytics tools, or license your data to partners with granular controls.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="detailed-workflow">
+        <h3>🔍 What Happens During Processing</h3>
+        <div class="workflow-details">
+            <div class="detail-item">
+                <strong>✓ Duplicate Removal</strong>
+                Automatically identifies and removes exact and near-duplicate rows
+            </div>
+            <div class="detail-item">
+                <strong>✓ Data Validation</strong>
+                Checks data types, formats, and business rule compliance
+            </div>
+            <div class="detail-item">
+                <strong>✓ Missing Value Handling</strong>
+                Intelligently handles null, empty, and invalid entries
+            </div>
+            <div class="detail-item">
+                <strong>✓ Format Standardization</strong>
+                Normalizes dates, phone numbers, addresses, and other formats
+            </div>
+            <div class="detail-item">
+                <strong>✓ Schema Validation</strong>
+                Ensures data structure matches expected schema and types
+            </div>
+            <div class="detail-item">
+                <strong>✓ Audit Trail</strong>
+                Complete logging of all transformations for compliance
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
